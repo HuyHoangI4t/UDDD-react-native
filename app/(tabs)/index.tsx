@@ -1,353 +1,604 @@
-import React from 'react'; 
-import { View, Text, Image, Pressable, ScrollView, FlatList, SectionList, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+// import React, { useState } from 'react';
+// import {
+//   View,
+//   Text,
+//   TextInput,
+//   TouchableOpacity,
+//   ScrollView,
+//   Image,
+//   StyleSheet,
+//   SafeAreaView,
+//   LayoutChangeEvent,
+//   Modal,
+//   FlatList,
+// } from 'react-native';
+// import { LinearGradient } from 'expo-linear-gradient';
+// import { MaterialIcons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
-const danhMuc = [
-  { id: '1', title: 'Công việc', icon: 'briefcase-outline' as const, count: '4 việc', color: '#2563eb' },
-  { id: '2', title: 'Học tập', icon: 'book-outline' as const, count: '2 bài', color: '#7c3aed' },
-  { id: '3', title: 'Cá nhân', icon: 'person-outline' as const, count: '3 việc', color: '#059669' },
-  { id: '4', title: 'Dự án', icon: 'folder-outline' as const, count: '1 mục', color: '#d97706' },
-];
+// // =========================================================================
+// // 1. BẢNG MÃ MÀU GIAO DIỆN (THEME COLORS)
+// // =========================================================================
+// const AppColors = {
+//   // --- MÀU CHỦ ĐẠO & THƯƠNG HIỆU ---
+//   primary: '#132F73',        // Xanh Navy đậm (Nút bấm chính, tab đang chọn)
+//   primaryLight: '#1E3E8F',   // Xanh Navy lớp kính (Dùng cho gradient banner)
+//   accent: '#5B61F4',         // Tím Indigo điểm nhấn (Badge Logo, Link Quên mật khẩu)
+//   accentLight: '#818CF8',    // Tím sáng
 
-const congViec = [
-  {
-    title: 'Cần làm hôm nay',
-    data: [
-      { id: 't1', name: 'Thiết kế giao diện Task App', time: '14:00', priority: 'Cao', done: false },
-      { id: 't2', name: 'Nộp bài tập QTM', time: '17:00', priority: 'Gấp', done: true },
-    ],
-  },
-  {
-    title: 'Kế hoạch sắp tới',
-    data: [
-      { id: 't3', name: 'Học lý thuyết React Native', time: 'Ngày mai', priority: 'Trung bình', done: false },
-      { id: 't4', name: 'Họp nhóm', time: 'Thứ 6', priority: 'Bình thường', done: false },
-    ],
-  },
-  {
-    title: 'Đã hoàn thành gần đây',
-    data: [
-      { id: 't5', name: 'Cài đặt môi trường SDK 54 IOS', time: 'Hôm qua', priority: 'Xong', done: true },
-    ],
-  },
-];
+//   // --- MÀU NỀN & KHUNG NHẬP LIỆU ---
+//   background: '#F3F6FD',     // Nền ứng dụng (Xanh khói sáng)
+//   cardBg: '#FFFFFF',         // Nền ô input & nền thẻ (Trắng tinh)
+//   muted: '#EEF2F9',          // Nền thanh trượt tab (Xám xanh nhạt)
+//   border: '#E2E8F0',         // Viền mảnh ô input và đường kẻ ngăn cách
 
-export default function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.header}>
-        <View style={styles.userInfo}>
-          <Image source={require('../../assets/images/icon.png')} style={styles.avatar} />
-          <View>
-            <Text style={styles.headerGreeting}>Xin chào,</Text>
-            <Text style={styles.headerName}>Huy Hoàng</Text>
-          </View>
-        </View>
-        <Pressable style={styles.headerButton} onPress={() => Alert.alert('Thông báo', 'Không có thông báo mới')}>
-          <Ionicons name="notifications-outline" size={24} color="#333" />
-        </Pressable>
-      </View>
+//   // --- MÀU VĂN BẢN (TYPOGRAPHY) ---
+//   textForeground: '#0F172A', // Chữ đậm nội dung (Tiêu đề, giá trị nhập)
+//   textMuted: '#64748B',      // Chữ nhãn LABEL & placeholder
+//   textSubtle: '#94A3B8',     // Chữ chú thích nhỏ & chữ 'hoặc'
+// };
 
-      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        <View style={styles.statsCard}>
-          <View style={styles.statsHeader}>
-            <View>
-              <Text style={styles.statsLabel}>Tổng quan công việc</Text>
-              <Text style={styles.statsTitle}>Hoàn thành 50%</Text>
-            </View>
-            <MaterialCommunityIcons name="chart-donut" size={36} color="#fff" />
-          </View>
-          <View style={styles.progressBarBackground}>
-            <View style={styles.progressBarActive} />
-          </View>
-          <View style={styles.statsFooter}>
-            <Text style={styles.statsSubtext}>1 / 2 việc hôm nay đã xong</Text>
-            <Pressable style={styles.statsActionButton} onPress={() => Alert.alert('Thao tác', 'Mở form tạo mới')}>
-              <Feather name="plus" size={16} color="#2563eb" />
-              <Text style={styles.statsActionText}>Thêm việc</Text>
-            </Pressable>
-          </View>
-        </View>
+// // Danh sách các Khoa / Viện cho mục Đăng ký
+// const DEPARTMENTS = [
+//   'Khoa Kinh tế',
+//   'Khoa Khoa học TN&CN',
+//   'Khoa Y Dược',
+//   'Khoa Nông Nghiệp',
+//   'Khoa Ngoại Ngữ',
+//   'Khoa Sư phạm',
+//   'Khoa Lý luận Chính trị',
+// ];
 
-        <View style={styles.sectionHeaderRow}>
-          <Text style={styles.sectionHeading}>Danh mục</Text>
-          <Pressable onPress={() => Alert.alert('Danh mục', 'Xem tất cả')}>
-            <Text style={styles.seeAllText}>Tất cả</Text>
-          </Pressable>
-        </View>
+// export default function IndexScreen() {
+//   // 0: Đăng Nhập, 1: Đăng Ký
+//   const [activeTab, setActiveTab] = useState<0 | 1>(0);
+//   const [obscurePassword, setObscurePassword] = useState(true);
+//   const [tabWidth, setTabWidth] = useState(0);
 
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={danhMuc}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.categoryList}
-          renderItem={({ item }) => (
-            <Pressable style={styles.categoryCard} onPress={() => Alert.alert('Danh mục', item.title)}>
-              <View style={[styles.iconWrapper, { backgroundColor: `${item.color}15` }]}>
-                <Ionicons name={item.icon} size={24} color={item.color} />
-              </View>
-              <Text style={styles.categoryName}>{item.title}</Text>
-              <Text style={styles.categoryCount}>{item.count}</Text>
-            </Pressable>
-          )}
-        />
+//   // Form State
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [firstName, setFirstName] = useState('');
+//   const [lastName, setLastName] = useState('');
+//   const [studentId, setStudentId] = useState('');
+//   const [regEmail, setRegEmail] = useState('');
+//   const [department, setDepartment] = useState('Khoa Khoa học TN&CN');
+//   const [modalVisible, setModalVisible] = useState(false);
 
-        <Text style={[styles.sectionHeading, { marginTop: 24, marginBottom: 8 }]}>Nhiệm vụ theo lịch</Text>
+//   const onTabLayout = (e: LayoutChangeEvent) => {
+//     const width = e.nativeEvent.layout.width - 8;
+//     setTabWidth(width);
+//   };
 
-        <SectionList
-          scrollEnabled={false}
-          sections={congViec}
-          keyExtractor={(item) => item.id}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.groupHeaderText}>{title}</Text>
-          )}
-          renderItem={({ item }) => (
-            <View style={styles.taskCard}>
-              <Pressable
-                style={[styles.checkbox, item.done && styles.checkboxDone]}
-                onPress={() => Alert.alert('Trạng thái', `Đổi trạng thái: ${item.name}`)}
-              >
-                {item.done && <Ionicons name="checkmark" size={14} color="#fff" />}
-              </Pressable>
-              <View style={styles.taskBody}>
-                <Text style={[styles.taskTitle, item.done && styles.taskTitleDone]}>{item.name}</Text>
-                <View style={styles.taskMetaRow}>
-                  <View style={styles.timeTag}>
-                    <Feather name="clock" size={13} color="#666" />
-                    <Text style={styles.taskTimeText}>{item.time}</Text>
-                  </View>
-                  <View style={styles.priorityTag}>
-                    <Text style={styles.priorityText}>{item.priority}</Text>
-                  </View>
-                </View>
-              </View>
-              <Pressable onPress={() => Alert.alert('Tùy chọn', item.name)}>
-                <Feather name="more-vertical" size={18} color="#999" />
-              </Pressable>
-            </View>
-          )}
-        />
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <ScrollView
+//         bounces={false}
+//         showsVerticalScrollIndicator={false}
+//         contentContainerStyle={styles.scrollContent}
+//       >
+//         {/* ================= HEADER BANNER & GRADIENT ================= */}
+//         <View style={styles.headerContainer}>
+//           <Image
+//             source={{
+//               uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSia8eUdtN1j1wk1pdpRQVANoA2CHF8kslvuf41s72dxg&s=10',
+//             }}
+//             style={styles.headerImage}
+//             resizeMode="cover"
+//           />
+//           <LinearGradient
+//             colors={[
+//               'rgba(19, 47, 115, 0.45)',
+//               'rgba(19, 47, 115, 0.70)',
+//               'rgba(243, 246, 253, 0.88)',
+//               AppColors.background,
+//             ]}
+//             locations={[0.0, 0.45, 0.8, 1.0]}
+//             style={styles.gradientOverlay}
+//           />
+//           <View style={styles.brandContainer}>
+//             <View style={styles.brandRow}>
+//               <View style={styles.logoBox}>
+//                 <MaterialIcons name="layers" size={22} color="#FFFFFF" />
+//               </View>
+//               <Text style={styles.brandTitle}>CampusIQ</Text>
+//             </View>
+//             <Text style={styles.brandSubtitle}>Cổng Thông Tin Sinh Viên Thông Minh</Text>
+//           </View>
+//         </View>
 
-const styles = StyleSheet.create({
-  safeArea: { //tránh vùng tai thỏ
-    flex: 1,
-    backgroundColor: '#fff',
-    padding:10,
-  },
-  scrollContainer: { // Khung ngoài
-    paddingHorizontal: 10,
-    flex: 1,
-  },
-  scrollContent: { // Nội dung bên trong
-    paddingHorizontal: 16,
-    paddingBottom: 50, 
-  },
+//         {/* ================= TAB SWITCHER (ĐĂNG NHẬP / ĐĂNG KÝ) ================= */}
+//         <View style={styles.tabOuterPadding}>
+//           <View style={styles.tabTrack} onLayout={onTabLayout}>
+//             {tabWidth > 0 && (
+//               <View
+//                 style={[
+//                   styles.tabIndicator,
+//                   {
+//                     width: tabWidth / 2,
+//                     transform: [{ translateX: activeTab === 0 ? 0 : tabWidth / 2 }],
+//                   },
+//                 ]}
+//               />
+//             )}
 
-  header: { 
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderColor: '#eee',
-  },
-  userInfo: { 
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  avatar: { 
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-  },
-  headerGreeting: { 
-    fontSize: 14,
-    color: '#666',
-  },
-  headerName: { 
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  headerButton: { // chuông
-    padding: 8,
-  },
+//             <TouchableOpacity
+//               style={styles.tabItem}
+//               onPress={() => setActiveTab(0)}
+//               activeOpacity={0.8}
+//             >
+//               <Text
+//                 style={[
+//                   styles.tabLabel,
+//                   activeTab === 0 ? styles.tabLabelActive : styles.tabLabelInactive,
+//                 ]}
+//               >
+//                 Đăng Nhập
+//               </Text>
+//             </TouchableOpacity>
 
-  statsCard: { // Thẻ chính
-    backgroundColor: '#f5f5f5',
-    padding: 16,
-    borderRadius: 10,
-    marginVertical: 16,
-  },
-  statsHeader: { // Hàng thông tin
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    
-  },
-  statsLabel: { // Chữ phụ
-    fontSize: 14,
-    color: '#666',
-  },
-  statsTitle: { // Tiêu đề chính
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginTop: 4,
-  },
-  progressBarBackground: { // thanh tiến độ
-    height: 8,
-    backgroundColor: '#ddd',
-    borderRadius: 4,
-    marginVertical: 12,
-  },
-  progressBarActive: { // Vạch tiến độ
-    width: '50%',
-    height: '100%',
-    backgroundColor: 'blue',
-    borderRadius: 4,
-  },
-  statsFooter: { // Đáy thẻ
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  statsSubtext: { // Chữ tiến độ
-    fontSize: 14,
-    color: '#555',
-  },
-  statsActionButton: { // Nút thêm
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'blue',
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 8,
-    gap: 6,
-  },
-  statsActionText: { // Chữ nút thêm
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
+//             <TouchableOpacity
+//               style={styles.tabItem}
+//               onPress={() => setActiveTab(1)}
+//               activeOpacity={0.8}
+//             >
+//               <Text
+//                 style={[
+//                   styles.tabLabel,
+//                   activeTab === 1 ? styles.tabLabelActive : styles.tabLabelInactive,
+//                 ]}
+//               >
+//                 Đăng Ký
+//               </Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
 
-  sectionHeaderRow: { // Hàng tiêu đề
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 12,
-    marginBottom: 10,
-  },
-  sectionHeading: { // Tiêu đề mục
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  seeAllText: { // Nút xem thêm
-    fontSize: 15,
-    color: 'blue',
-    fontWeight: '600',
-  },
+//         {/* ================= FORM BODY ================= */}
+//         <View style={styles.formContainer}>
+//           {activeTab === 0 ? (
+//             /* --- FORM 1: ĐĂNG NHẬP --- */
+//             <View>
+//               <Text style={styles.label}>EMAIL HOẶC MÃ SINH VIÊN</Text>
+//               <View style={styles.inputBox}>
+//                 <Feather name="mail" size={19} color={AppColors.textMuted} style={styles.iconPrefix} />
+//                 <TextInput
+//                   style={styles.textInput}
+//                   placeholder="mssv@sv.ttn.edu.vn"
+//                   placeholderTextColor={AppColors.textMuted}
+//                   value={email}
+//                   onChangeText={setEmail}
+//                   autoCapitalize="none"
+//                 />
+//               </View>
 
-  categoryList: { // Danh sách danh mục
-    gap: 12,
-    paddingVertical: 4,
-  },
-  categoryCard: { // Thẻ danh mục
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 10,
-    width: 95,
-    borderWidth: 1,
-    borderColor: '#eee',
-  },
-  iconWrapper: { // Khung icon
-    marginBottom: 6,
-  },
-  categoryName: { // Tên danh mục
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  categoryCount: { // Số lượng việc
-    fontSize: 13,
-    color: '#777',
-    marginTop: 2,
-  },
+//               <View style={{ height: 16 }} />
 
-  groupHeaderText: { // Tiêu đề nhóm
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#444',
-    backgroundColor: '#f0f0f0',
-    padding: 8,
-    borderRadius: 6,
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  taskCard: { // Thẻ nhiệm vụ
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderColor: '#eee',
-  },
-  checkbox: { // Ô chọn
-    width: 24,
-    height: 24,
-    borderRadius: 6,
-    borderWidth: 2,
-    borderColor: '#999',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
-  },
-  checkboxDone: { // Ô chọn xong
-    backgroundColor: 'green',
-    borderColor: 'green',
-  },
-  taskBody: { // Thân nhiệm vụ
-    flex: 1,
-  },
-  taskTitle: { // Tên nhiệm vụ
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  taskTitleDone: { // Tên nhiệm vụ xong
-    textDecorationLine: 'line-through',
-    color: '#aaa',
-  },
-  taskMetaRow: { // Hàng thông tin phụ
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 4,
-  },
-  timeTag: { // Thẻ thời gian
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  taskTimeText: { // Chữ thời gian
-    fontSize: 13,
-    color: '#666',
-  },
-  priorityTag: { // Thẻ ưu tiên
-    backgroundColor: '#eee',
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 4,
-  },
-  priorityText: { // Chữ ưu tiên
-    fontSize: 12,
-    color: '#555',
-  },
-  moreButton: { // Nút tùy chọn
-    padding: 6,
-  },
-});
+//               <Text style={styles.label}>MẬT KHẨU</Text>
+//               <View style={styles.inputBox}>
+//                 <Feather name="lock" size={19} color={AppColors.textMuted} style={styles.iconPrefix} />
+//                 <TextInput
+//                   style={styles.textInput}
+//                   placeholder="••••••••"
+//                   placeholderTextColor={AppColors.textMuted}
+//                   secureTextEntry={obscurePassword}
+//                   value={password}
+//                   onChangeText={setPassword}
+//                 />
+//                 <TouchableOpacity
+//                   onPress={() => setObscurePassword(!obscurePassword)}
+//                   style={styles.iconSuffix}
+//                 >
+//                   <MaterialIcons
+//                     name={obscurePassword ? 'visibility' : 'visibility-off'}
+//                     size={19}
+//                     color={AppColors.textMuted}
+//                   />
+//                 </TouchableOpacity>
+//               </View>
+
+//               <TouchableOpacity style={styles.forgotPassBtn} activeOpacity={0.7}>
+//                 <Text style={styles.forgotPassText}>Quên mật khẩu?</Text>
+//               </TouchableOpacity>
+
+//               <View style={{ height: 20 }} />
+
+//               <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85}>
+//                 <Text style={styles.primaryBtnText}>Đăng Nhập Vào Campus</Text>
+//               </TouchableOpacity>
+//             </View>
+//           ) : (
+//             /* --- FORM 2: ĐĂNG KÝ --- */
+//             <View>
+//               <View style={styles.row}>
+//                 <View style={styles.col}>
+//                   <Text style={styles.label}>HỌ VÀ TÊN ĐỆM</Text>
+//                   <View style={styles.inputBox}>
+//                     <TextInput
+//                       style={styles.textInput}
+//                       placeholder="Nguyễn Văn"
+//                       placeholderTextColor={AppColors.textMuted}
+//                       value={firstName}
+//                       onChangeText={setFirstName}
+//                     />
+//                   </View>
+//                 </View>
+
+//                 <View style={{ width: 12 }} />
+
+//                 <View style={styles.col}>
+//                   <Text style={styles.label}>TÊN</Text>
+//                   <View style={styles.inputBox}>
+//                     <TextInput
+//                       style={styles.textInput}
+//                       placeholder="An"
+//                       placeholderTextColor={AppColors.textMuted}
+//                       value={lastName}
+//                       onChangeText={setLastName}
+//                     />
+//                   </View>
+//                 </View>
+//               </View>
+
+//               <View style={{ height: 14 }} />
+
+//               <Text style={styles.label}>MÃ SỐ SINH VIÊN</Text>
+//               <View style={styles.inputBox}>
+//                 <TextInput
+//                   style={styles.textInput}
+//                   placeholder="23103023"
+//                   placeholderTextColor={AppColors.textMuted}
+//                   value={studentId}
+//                   onChangeText={setStudentId}
+//                   autoCapitalize="characters"
+//                 />
+//               </View>
+
+//               <View style={{ height: 14 }} />
+
+//               <Text style={styles.label}>EMAIL TRƯỜNG CẤP</Text>
+//               <View style={styles.inputBox}>
+//                 <TextInput
+//                   style={styles.textInput}
+//                   placeholder="mssv@sv.ttn.edu.vn"
+//                   placeholderTextColor={AppColors.textMuted}
+//                   value={regEmail}
+//                   onChangeText={setRegEmail}
+//                   autoCapitalize="none"
+//                   keyboardType="email-address"
+//                 />
+//               </View>
+
+//               <View style={{ height: 14 }} />
+
+//               <Text style={styles.label}>KHOA / NGÀNH HỌC</Text>
+//               <TouchableOpacity
+//                 style={[styles.inputBox, { justifyContent: 'space-between' }]}
+//                 activeOpacity={0.7}
+//                 onPress={() => setModalVisible(true)}
+//               >
+//                 <Text style={styles.dropdownText} numberOfLines={1}>
+//                   {department}
+//                 </Text>
+//                 <MaterialIcons name="keyboard-arrow-down" size={22} color={AppColors.textMuted} />
+//               </TouchableOpacity>
+
+//               <View style={{ height: 20 }} />
+
+//               <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85}>
+//                 <Text style={styles.primaryBtnText}>Tạo Tài Khoản Mới</Text>
+//               </TouchableOpacity>
+//             </View>
+//           )}
+
+//           {/* ================= PHẦN DÙNG CHUNG ================= */}
+//           <View style={{ height: 10 }} />
+//           <View style={styles.dividerRow}>
+//             <View style={styles.dividerLine} />
+//             <Text style={styles.dividerText}>hoặc</Text>
+//             <View style={styles.dividerLine} />
+//           </View>
+
+//           <View style={{ height: 20 }} />
+
+//           <TouchableOpacity style={styles.guestButton} activeOpacity={0.8}>
+//             <Text style={styles.guestBtnText}>
+//               Tiếp tục với tư cách Khách (Giới hạn tính năng)
+//             </Text>
+//           </TouchableOpacity>
+//         </View>
+//       </ScrollView>
+
+//       {/* POPUP MODAL CHỌN KHOA / NGÀNH */}
+//       <Modal
+//         visible={modalVisible}
+//         transparent
+//         animationType="fade"
+//         onRequestClose={() => setModalVisible(false)}
+//       >
+//         <TouchableOpacity
+//           style={styles.modalOverlay}
+//           activeOpacity={1}
+//           onPress={() => setModalVisible(false)}
+//         >
+//           <View style={styles.modalContent}>
+//             <Text style={styles.modalTitle}>Chọn Khoa / Ngành Học</Text>
+//             <FlatList
+//               data={DEPARTMENTS}
+//               keyExtractor={(item) => item}
+//               renderItem={({ item }) => (
+//                 <TouchableOpacity
+//                   style={[
+//                     styles.departmentItem,
+//                     item === department && styles.departmentItemSelected,
+//                   ]}
+//                   onPress={() => {
+//                     setDepartment(item);
+//                     setModalVisible(false);
+//                   }}
+//                 >
+//                   <Text
+//                     style={[
+//                       styles.departmentText,
+//                       item === department && styles.departmentTextSelected,
+//                     ]}
+//                   >
+//                     {item}
+//                   </Text>
+//                   {item === department && (
+//                     <MaterialCommunityIcons name="check" size={18} color={AppColors.primary} />
+//                   )}
+//                 </TouchableOpacity>
+//               )}
+//             />
+//           </View>
+//         </TouchableOpacity>
+//       </Modal>
+//     </SafeAreaView>
+//   );
+// }
+
+// // =========================================================================
+// // 2. STYLESHEET CHI TIẾT
+// // =========================================================================
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: AppColors.background,
+//   },
+//   scrollContent: {
+//     paddingBottom: 32,
+//   },
+
+//   /* HEADER */
+//   headerContainer: {
+//     height: 250,
+//     width: '100%',
+//     position: 'relative',
+//     justifyContent: 'flex-end',
+//   },
+//   headerImage: {
+//     ...StyleSheet.absoluteFillObject,
+//     width: '100%',
+//     height: '100%',
+//   },
+//   gradientOverlay: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+//   brandContainer: {
+//     paddingLeft: 28,
+//     paddingBottom: 22,
+//   },
+//   brandRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   logoBox: {
+//     width: 38,
+//     height: 38,
+//     borderRadius: 12,
+//     backgroundColor: AppColors.accent,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   brandTitle: {
+//     fontSize: 22,
+//     fontWeight: '900',
+//     color: '#FFFFFF',
+//     letterSpacing: 0.2,
+//     marginLeft: 10,
+//   },
+//   brandSubtitle: {
+//     fontSize: 13,
+//     fontWeight: '600',
+//     color: '#FFFFFF',
+//     marginTop: 4,
+//   },
+
+//   /* TAB SWITCHER */
+//   tabOuterPadding: {
+//     paddingHorizontal: 24,
+//     marginVertical: 18,
+//   },
+//   tabTrack: {
+//     height: 48,
+//     padding: 4,
+//     backgroundColor: 'rgba(238, 242, 249, 0.7)',
+//     borderRadius: 30,
+//     flexDirection: 'row',
+//     position: 'relative',
+//   },
+//   tabIndicator: {
+//     position: 'absolute',
+//     top: 4,
+//     bottom: 4,
+//     left: 4,
+//     backgroundColor: '#FFFFFF',
+//     borderRadius: 24,
+//     shadowColor: AppColors.primary,
+//     shadowOffset: { width: 0, height: 3 },
+//     shadowOpacity: 0.08,
+//     shadowRadius: 10,
+//     elevation: 3,
+//   },
+//   tabItem: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     zIndex: 1,
+//   },
+//   tabLabel: {
+//     fontSize: 13.5,
+//   },
+//   tabLabelActive: {
+//     fontWeight: '900',
+//     color: AppColors.primary,
+//   },
+//   tabLabelInactive: {
+//     fontWeight: '700',
+//     color: AppColors.textMuted,
+//   },
+
+//   /* FORM INPUTS */
+//   formContainer: {
+//     paddingHorizontal: 24,
+//   },
+//   row: {
+//     flexDirection: 'row',
+//   },
+//   col: {
+//     flex: 1,
+//   },
+//   label: {
+//     fontSize: 11,
+//     fontWeight: '800',
+//     letterSpacing: 0.8,
+//     color: AppColors.textMuted,
+//     marginBottom: 8,
+//   },
+//   inputBox: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: AppColors.cardBg,
+//     borderRadius: 20,
+//     borderWidth: 1.2,
+//     borderColor: AppColors.border,
+//     paddingHorizontal: 16,
+//     height: 50,
+//     shadowColor: AppColors.border,
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.4,
+//     shadowRadius: 6,
+//     elevation: 1,
+//   },
+//   iconPrefix: {
+//     marginRight: 10,
+//   },
+//   iconSuffix: {
+//     padding: 4,
+//   },
+//   textInput: {
+//     flex: 1,
+//     fontSize: 14,
+//     color: AppColors.textForeground,
+//   },
+//   dropdownText: {
+//     fontSize: 14,
+//     color: AppColors.textForeground,
+//     flex: 1,
+//   },
+//   forgotPassBtn: {
+//     alignSelf: 'flex-end',
+//     marginTop: 10,
+//   },
+//   forgotPassText: {
+//     fontSize: 12.5,
+//     fontWeight: '700',
+//     color: AppColors.accent,
+//   },
+
+//   /* BUTTONS & FOOTER */
+//   primaryButton: {
+//     width: '100%',
+//     height: 52,
+//     backgroundColor: AppColors.primary,
+//     borderRadius: 18,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   primaryBtnText: {
+//     fontSize: 15,
+//     fontWeight: '800',
+//     color: '#FFFFFF',
+//   },
+//   dividerRow: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   dividerLine: {
+//     flex: 1,
+//     height: 1,
+//     backgroundColor: AppColors.border,
+//   },
+//   dividerText: {
+//     paddingHorizontal: 14,
+//     fontSize: 12,
+//     color: AppColors.textMuted,
+//   },
+//   guestButton: {
+//     width: '100%',
+//     height: 50,
+//     borderWidth: 1.2,
+//     borderColor: AppColors.border,
+//     backgroundColor: 'transparent',
+//     borderRadius: 18,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   guestBtnText: {
+//     fontSize: 13,
+//     fontWeight: '700',
+//     color: AppColors.textMuted,
+//   },
+
+//   /* MODAL */
+//   modalOverlay: {
+//     flex: 1,
+//     backgroundColor: 'rgba(0,0,0,0.4)',
+//     justifyContent: 'center',
+//     padding: 24,
+//   },
+//   modalContent: {
+//     backgroundColor: '#FFFFFF',
+//     borderRadius: 20,
+//     padding: 20,
+//     maxHeight: '70%',
+//   },
+//   modalTitle: {
+//     fontSize: 16,
+//     fontWeight: '800',
+//     color: AppColors.textForeground,
+//     marginBottom: 16,
+//     textAlign: 'center',
+//   },
+//   departmentItem: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     paddingVertical: 14,
+//     borderBottomWidth: 1,
+//     borderBottomColor: AppColors.border,
+//   },
+//   departmentItemSelected: {
+//     backgroundColor: AppColors.muted,
+//     paddingHorizontal: 10,
+//     borderRadius: 10,
+//   },
+//   departmentText: {
+//     fontSize: 14,
+//     color: AppColors.textForeground,
+//   },
+//   departmentTextSelected: {
+//     fontWeight: '700',
+//     color: AppColors.primary,
+//   },
+// });
