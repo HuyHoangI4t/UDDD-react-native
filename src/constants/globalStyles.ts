@@ -7,7 +7,8 @@ export const authStyles = StyleSheet.create({
     backgroundColor: AppColors.background,
   },
   scrollContent: {
-    paddingBottom: 32,
+    flexGrow: 1, 
+    paddingBottom: 32
   },
 
   /* HEADER */
@@ -37,21 +38,21 @@ export const authStyles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 12,
-    backgroundColor: AppColors.accent,
+    backgroundColor: AppColors.cardBg,
     justifyContent: 'center',
     alignItems: 'center',
   },
   brandTitle: {
     fontSize: 22,
     fontWeight: '900',
-    color: '#FFFFFF',
+    color: AppColors.primary,
     letterSpacing: 0.2,
     marginLeft: 10,
   },
   brandSubtitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: AppColors.textMuted,
     marginTop: 4,
   },
 
