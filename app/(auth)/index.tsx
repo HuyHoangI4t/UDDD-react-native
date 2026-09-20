@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
-  KeyboardAvoidingView, 
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -241,7 +232,7 @@ export default function AuthScreen() {
 
                     <View style={{ height: 16 }} />
 
-                    <TouchableOpacity style={authStyles.guestButton} onPress={handleAuthAction} activeOpacity={0.8}>
+                    <TouchableOpacity style={authStyles.guestButton} onPress={() => router.replace('/(main)')} activeOpacity={0.8}>
                       <Text style={authStyles.guestBtnText}>
                         Khách (Giới hạn tính năng)
                       </Text>
