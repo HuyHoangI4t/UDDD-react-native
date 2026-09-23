@@ -244,3 +244,99 @@ export const authStyles = StyleSheet.create({
     color: AppColors.primary,
   },
 });
+
+export const mainStyles = StyleSheet.create({
+  row: { flexDirection: "row", alignItems: "center" },
+  between: { justifyContent: "space-between" },
+  card: { backgroundColor: AppColors.cardBg, borderRadius: 16, padding: 16, borderWidth: 1, borderColor: AppColors.border, elevation: 2, shadowColor: "#000", shadowOpacity: 0.04, shadowRadius: 4 },
+  iconBtn: { width: 36, height: 36, borderRadius: 12, alignItems: "center", justifyContent: "center" },
+  label: { fontSize: 11, fontWeight: "700", color: AppColors.textMuted, textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 },
+  inputRow: { flexDirection: "row", alignItems: "center", backgroundColor: AppColors.muted, borderWidth: 1, borderColor: AppColors.border, borderRadius: 12 },
+  input: { flex: 1, paddingHorizontal: 12, paddingVertical: 12, fontSize: 14, color: AppColors.textForeground },
+  inputPlain: { backgroundColor: AppColors.cardBg, borderWidth: 1, borderColor: AppColors.border, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12, fontSize: 14, color: AppColors.textForeground },
+  primaryBtn: { backgroundColor: AppColors.primary, borderRadius: 16, paddingVertical: 14, alignItems: "center" },
+  primaryBtnText: { color: "#fff", fontWeight: "700", fontSize: 16 },
+  sectionTitle: { fontSize: 16, fontWeight: "900", color: AppColors.textForeground },
+  sectionLink: { fontSize: 12, fontWeight: "700", color: AppColors.accent },
+  chip: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 99, borderWidth: 1, borderColor: AppColors.border, backgroundColor: AppColors.cardBg },
+  chipText: { fontSize: 12, fontWeight: "700", color: AppColors.textMuted },
+});
+
+export const navHeaderStyles = StyleSheet.create({
+  header: {
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 20,
+    backgroundColor: AppColors.primary,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  titleContainer: {
+    flex: 1,
+  },
+  title: {
+    color: '#fff',
+    fontWeight: '900',
+    fontSize: 18,
+  },
+  subtitle: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 12,
+    marginTop: 2,
+  },
+  iconBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.15)',
+  },
+});
+
+export const tabBarStyles = StyleSheet.create({
+  container: {
+    backgroundColor: 'transparent',
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
+  navCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: AppColors.cardBg,
+    borderRadius: 32,
+    borderWidth: 1.2,
+    borderColor: AppColors.border,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.09,
+    shadowRadius: 20,
+    elevation: 8,
+  },
+  tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  iconContainer: {
+    width: 44,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedIconContainer: {
+    backgroundColor: '#EEF2FF',
+  },
+  label: {
+    fontSize: 10,
+    letterSpacing: 0.6,
+    marginTop: 4,
+  },
+});
