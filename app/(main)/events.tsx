@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppColors } from "../../src/constants/appColors";
 import { mainStyles as s } from "../../src/constants/globalStyles";
-
-type Screen = "login" | "signup" | "home" | "map" | "schedule" | "feedback" | "events" | "sos" | "profile";
 
 const EVENTS = [
   { id: 1, title: "Tech Innovation Summit 2025", category: "Công nghệ", date: "5 Tháng 8, 2025", time: "10:00 AM", location: "Hội trường chính", attendees: 312, capacity: 400, image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=780&h=256&fit=crop", rsvp: false, description: "Sự kiện thường niên giới thiệu các dự án công nghệ của sinh viên và các bài phát biểu chuyên ngành." },
@@ -24,8 +24,9 @@ function NavHeader({
   title: string; subtitle?: string; onBack?: () => void;
   rightIcon?: string; onRight?: () => void; bg?: string; children?: React.ReactNode;
 }) {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 20, backgroundColor: bg }}>
+    <View style={{ paddingHorizontal: 24, paddingTop: Math.max(insets.top + 16, 20), paddingBottom: 20, backgroundColor: bg }}>
       <View style={[s.row, { gap: 12, marginBottom: children ? 16 : 0 }]}>
         {onBack && (
           <TouchableOpacity onPress={onBack} style={[s.iconBtn, { backgroundColor: "rgba(255,255,255,0.15)" }]}>
@@ -47,7 +48,8 @@ function NavHeader({
   );
 }
 
-export default function EventsScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+export default function EventsScreen() {
+  const router = useRouter();
   const [events, setEvents] = useState(EVENTS);
   const [activeFilter, setActiveFilter] = useState("Tất cả");
   const cats = ["Tất cả", "Công nghệ", "Học thuật", "Sức khỏe", "Thể thao"];
@@ -66,7 +68,7 @@ export default function EventsScreen({ onNavigate }: { onNavigate: (s: Screen) =
 
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
-      <NavHeader title="Sự kiện" subtitle={`${events.filter((e) => e.rsvp).length} sự kiện đã tham gia`} onBack={() => onNavigate("home")} rightIcon="search">
+      <NavHeader title="Sự kiện" subtitle={`${events.filter((e) => e.rsvp).length} sự kiện đã tham gia`} onBack={() => router.push("/(main)")} rightIcon="search">
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
           {cats.map((c) => (
             <TouchableOpacity key={c} onPress={() => setActiveFilter(c)}

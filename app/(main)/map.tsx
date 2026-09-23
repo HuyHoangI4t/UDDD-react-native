@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppColors } from "../../src/constants/appColors";
 import { mainStyles as s } from "../../src/constants/globalStyles";
-
-type Screen = "login" | "signup" | "home" | "map" | "schedule" | "feedback" | "events" | "sos" | "profile";
 
 const CAMPUS_BUILDINGS = [
   { id: 1, name: "Tòa A Kỹ thuật", x: 28, y: 32, type: "academic", color: AppColors.accent },
@@ -27,8 +27,9 @@ function NavHeader({
   title: string; subtitle?: string; onBack?: () => void;
   rightIcon?: string; onRight?: () => void; bg?: string; children?: React.ReactNode;
 }) {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 20, backgroundColor: bg }}>
+    <View style={{ paddingHorizontal: 24, paddingTop: Math.max(insets.top + 16, 20), paddingBottom: 20, backgroundColor: bg }}>
       <View style={[s.row, { gap: 12, marginBottom: children ? 16 : 0 }]}>
         {onBack && (
           <TouchableOpacity onPress={onBack} style={[s.iconBtn, { backgroundColor: "rgba(255,255,255,0.15)" }]}>
@@ -50,7 +51,8 @@ function NavHeader({
   );
 }
 
-export default function MapScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+export default function MapScreen() {
+  const router = useRouter();
   const [selected, setSelected] = useState<(typeof CAMPUS_BUILDINGS)[0] | null>(null);
   const [filter, setFilter] = useState("all");
   const MAP_H = 280;
@@ -65,7 +67,7 @@ export default function MapScreen({ onNavigate }: { onNavigate: (s: Screen) => v
 
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
-      <NavHeader title="Bản đồ khuôn viên" onBack={() => onNavigate("home")} rightIcon="filter">
+      <NavHeader title="Bản đồ khuôn viên" onBack={() => router.push("/(main)")} rightIcon="filter">
         <View style={[s.inputRow, { backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)" }]}>
           <Feather name="search" size={14} color="rgba(255,255,255,0.5)" style={{ marginLeft: 14 }} />
           <TextInput style={[s.input, { color: "#fff" }]} placeholder="Tìm kiếm tòa nhà, phòng..." placeholderTextColor="rgba(255,255,255,0.5)" />

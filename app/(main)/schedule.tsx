@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppColors } from "../../src/constants/appColors";
 import { mainStyles as s } from "../../src/constants/globalStyles";
-
-type Screen = "login" | "signup" | "home" | "map" | "schedule" | "feedback" | "events" | "sos" | "profile";
 
 const SCHEDULE = [
   { id: 1, course: "Cấu trúc dữ liệu & Giải thuật", code: "CS301", room: "ENG-B204", time: "08:00 – 09:30", day: "Mon", status: "upcoming", lecturer: "Dr. Amara Osei" },
@@ -25,8 +25,9 @@ function NavHeader({
   title: string; subtitle?: string; onBack?: () => void;
   rightIcon?: string; onRight?: () => void; bg?: string; children?: React.ReactNode;
 }) {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 20, backgroundColor: bg }}>
+    <View style={{ paddingHorizontal: 24, paddingTop: Math.max(insets.top + 16, 20), paddingBottom: 20, backgroundColor: bg }}>
       <View style={[s.row, { gap: 12, marginBottom: children ? 16 : 0 }]}>
         {onBack && (
           <TouchableOpacity onPress={onBack} style={[s.iconBtn, { backgroundColor: "rgba(255,255,255,0.15)" }]}>
@@ -48,7 +49,8 @@ function NavHeader({
   );
 }
 
-export default function ScheduleScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+export default function ScheduleScreen() {
+  const router = useRouter();
   const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6"];
   const dayCodes = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const [activeDay, setActiveDay] = useState("Mon");
@@ -62,7 +64,7 @@ export default function ScheduleScreen({ onNavigate }: { onNavigate: (s: Screen)
 
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
-      <NavHeader title="Lịch học" subtitle="Học kỳ 1 • 2024/2025" onBack={() => onNavigate("home")}>
+      <NavHeader title="Lịch học" subtitle="Học kỳ 1 • 2024/2025" onBack={() => router.push("/(main)")}>
         <View style={{ flexDirection: "row", gap: 8 }}>
           {days.map((d, i) => (
             <TouchableOpacity key={d} onPress={() => setActiveDay(dayCodes[i])}

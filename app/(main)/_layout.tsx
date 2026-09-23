@@ -15,6 +15,8 @@ export default function MainLayout() {
       <Tabs.Screen name="schedule" />
       <Tabs.Screen name="events" />
       <Tabs.Screen name="profile" />
+      <Tabs.Screen name="feedback" options={{ href: null }} />
+      <Tabs.Screen name="sos" options={{ href: null }} />
     </Tabs>
   );
 }

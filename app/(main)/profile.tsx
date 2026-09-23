@@ -3,11 +3,13 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-nativ
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppColors } from "../../src/constants/appColors";
 import { mainStyles as s } from "../../src/constants/globalStyles";
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("Kwame Asante");
   const [phone, setPhone] = useState("+233-54-881-2023");
@@ -25,9 +27,12 @@ export default function ProfileScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
-      <LinearGradient colors={[AppColors.primary, AppColors.primary] as [string, string]} style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 40 }}>
+      <LinearGradient
+        colors={[AppColors.primary, AppColors.primary] as [string, string]}
+        style={{ paddingHorizontal: 24, paddingTop: Math.max(insets.top + 16, 24), paddingBottom: 40 }}
+      >
         <View style={[s.row, s.between]}>
-          <TouchableOpacity onPress={() => router.back()} style={[s.iconBtn, { backgroundColor: "rgba(255,255,255,0.15)" }]}>
+          <TouchableOpacity onPress={() => router.push("/(main)")} style={[s.iconBtn, { backgroundColor: "rgba(255,255,255,0.15)" }]}>
             <Feather name="arrow-left" size={16} color="#fff" />
           </TouchableOpacity>
           <Text style={{ color: "#fff", fontWeight: "900", fontSize: 18, flex: 1, marginLeft: 12 }}>Hồ sơ của tôi</Text>
@@ -87,9 +92,9 @@ export default function ProfileScreen() {
               { label: "Thông báo đẩy", icon: "bell", toggle: true, val: notifs, set: setNotifs },
               { label: "Cảnh báo từ trường", icon: "alert-triangle", toggle: true, val: campusAlerts, set: setCampusAlerts },
               { label: "Cài đặt quyền riêng tư", icon: "lock", chevron: true },
-              { label: "Trợ giúp & Hỗ trợ", icon: "info", chevron: true },
-            ].map(({ label, icon, toggle, val, set, chevron }, i) => (
-              <View key={label} style={[s.row, s.between, { paddingHorizontal: 16, paddingVertical: 14 }, i < 3 && { borderBottomWidth: 1, borderBottomColor: AppColors.border }]}>
+              { label: "Trợ giúp & Hỗ trợ", icon: "info", chevron: true, onPress: () => router.push("/(main)/feedback") },
+            ].map(({ label, icon, toggle, val, set, chevron, onPress }, i) => (
+              <TouchableOpacity key={label} onPress={onPress} activeOpacity={onPress ? 0.7 : 1} style={[s.row, s.between, { paddingHorizontal: 16, paddingVertical: 14 }, i < 3 && { borderBottomWidth: 1, borderBottomColor: AppColors.border }]}>
                 <View style={s.row}>
                   <Feather name={icon as any} size={16} color={AppColors.textMuted} style={{ marginRight: 12 }} />
                   <Text style={{ fontSize: 14, fontWeight: "600", color: AppColors.textForeground }}>{label}</Text>
@@ -100,7 +105,7 @@ export default function ProfileScreen() {
                   </TouchableOpacity>
                 )}
                 {chevron && <Feather name="chevron-right" size={14} color={AppColors.textMuted} />}
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
 

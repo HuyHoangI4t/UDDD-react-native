@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppColors } from "../../src/constants/appColors";
 import { mainStyles as s } from "../../src/constants/globalStyles";
-
-type Screen = "login" | "signup" | "home" | "map" | "schedule" | "feedback" | "events" | "sos" | "profile";
 
 const ALERTS = [
   { id: 1, type: "info", text: "Thư viện đóng cửa lúc 8 giờ tối nay để bảo trì.", time: "2 giờ trước" },
@@ -13,12 +13,20 @@ const ALERTS = [
   { id: 3, type: "success", text: "Phản hồi #204 của bạn đã được giải quyết.", time: "1 giờ trước" },
 ];
 
-export default function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+export default function HomeScreen() {
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
+
+  const onNavigate = (screen: string) => {
+    if (screen === "home") router.push("/(main)");
+    else router.push(`/(main)/${screen}` as any);
+  };
+
   const quickActions = [
-    { icon: "navigation", label: "Bản đồ", screen: "map" as Screen, bg: AppColors.muted, fg: AppColors.accent },
-    { icon: "calendar", label: "Lịch học", screen: "schedule" as Screen, bg: "#DBEAFE", fg: AppColors.primary },
-    { icon: "message-square", label: "Phản hồi", screen: "feedback" as Screen, bg: "#FEF3C7", fg: "#D97706" },
-    { icon: "users", label: "Sự kiện", screen: "events" as Screen, bg: "#D1FAE5", fg: "#059669" },
+    { icon: "navigation", label: "Bản đồ", screen: "map", bg: AppColors.muted, fg: AppColors.accent },
+    { icon: "calendar", label: "Lịch học", screen: "schedule", bg: "#DBEAFE", fg: AppColors.primary },
+    { icon: "message-square", label: "Phản hồi", screen: "feedback", bg: "#FEF3C7", fg: "#D97706" },
+    { icon: "users", label: "Sự kiện", screen: "events", bg: "#D1FAE5", fg: "#059669" },
   ];
 
   const alertMeta: Record<string, { icon: string; color: string; bg: string; border: string }> = {
@@ -36,7 +44,10 @@ export default function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => 
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: AppColors.background }} showsVerticalScrollIndicator={false}>
-      <LinearGradient colors={[AppColors.primary, AppColors.primary]} style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 32 }}>
+      <LinearGradient
+        colors={[AppColors.primary, AppColors.primary]}
+        style={{ paddingHorizontal: 24, paddingTop: Math.max(insets.top + 16, 24), paddingBottom: 32 }}
+      >
         <View style={[s.row, s.between, { marginBottom: 16 }]}>
           <View>
             <Text style={{ color: "rgba(255,255,255,0.6)", fontSize: 11, fontWeight: "600", textTransform: "uppercase", letterSpacing: 1 }}>Chào buổi sáng</Text>
