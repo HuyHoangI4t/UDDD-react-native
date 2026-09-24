@@ -75,7 +75,7 @@ export default function ScheduleScreen() {
         </View>
       </NavHeader>
 
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 12 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 12, paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
         {dayClasses.length === 0 && (
           <View style={{ alignItems: "center", justifyContent: "center", height: 160 }}>
             <Feather name="calendar" size={32} color={AppColors.textMuted} />

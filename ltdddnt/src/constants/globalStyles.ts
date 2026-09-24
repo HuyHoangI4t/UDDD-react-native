@@ -299,9 +299,14 @@ export const navHeaderStyles = StyleSheet.create({
 
 export const tabBarStyles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: 'transparent',
     paddingHorizontal: 16,
     paddingBottom: 20,
+    zIndex: 100,
   },
   navCard: {
     flexDirection: 'row',

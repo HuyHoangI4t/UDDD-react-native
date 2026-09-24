@@ -26,7 +26,7 @@ export default function HomeScreen() {
     { icon: "navigation", label: "Bản đồ", screen: "map", bg: AppColors.muted, fg: AppColors.accent },
     { icon: "calendar", label: "Lịch học", screen: "schedule", bg: "#DBEAFE", fg: AppColors.primary },
     { icon: "message-square", label: "Phản hồi", screen: "feedback", bg: "#FEF3C7", fg: "#D97706" },
-    { icon: "users", label: "Sự kiện", screen: "events", bg: "#D1FAE5", fg: "#059669" },
+    { icon: "bar-chart-2", label: "Kết quả", screen: "grades", bg: "#D1FAE5", fg: "#059669" },
   ];
 
   const alertMeta: Record<string, { icon: string; color: string; bg: string; border: string }> = {
@@ -84,7 +84,7 @@ export default function HomeScreen() {
         </View>
       </LinearGradient>
 
-      <View style={{ paddingHorizontal: 24, marginTop: -16, gap: 20, paddingBottom: 24 }}>
+      <View style={{ paddingHorizontal: 24, marginTop: -16, gap: 20, paddingBottom: 110 }}>
         <View style={{ flexDirection: "row", gap: 10 }}>
           {quickActions.map(({ icon, label, screen, bg, fg }) => (
             <TouchableOpacity key={screen} onPress={() => onNavigate(screen)} activeOpacity={0.8}

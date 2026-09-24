@@ -66,7 +66,7 @@ export default function MapScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
+    <View style={{ flex: 1, backgroundColor: AppColors.background, paddingBottom: 100 }}>
       <NavHeader title="Bản đồ khuôn viên" onBack={() => router.push("/(main)")} rightIcon="filter">
         <View style={[s.inputRow, { backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)" }]}>
           <Feather name="search" size={14} color="rgba(255,255,255,0.5)" style={{ marginLeft: 14 }} />

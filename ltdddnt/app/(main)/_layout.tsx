@@ -13,10 +13,11 @@ export default function MainLayout() {
       <Tabs.Screen name="index" />
       <Tabs.Screen name="map" />
       <Tabs.Screen name="schedule" />
-      <Tabs.Screen name="events" />
+      <Tabs.Screen name="grades" />
       <Tabs.Screen name="profile" />
       <Tabs.Screen name="feedback" options={{ href: null }} />
       <Tabs.Screen name="sos" options={{ href: null }} />
+      <Tabs.Screen name="course-detail" options={{ href: null }} />
     </Tabs>
   );
 }

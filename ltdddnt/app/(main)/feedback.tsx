@@ -46,7 +46,7 @@ export default function FeedbackScreen() {
         </View>
       </View>
 
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 20 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 20, paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
         {submitted ? (
           <View style={[s.card, { alignItems: "center", padding: 32, gap: 16 }]}>
             <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: "#ECFDF5", alignItems: "center", justifyContent: "center" }}>

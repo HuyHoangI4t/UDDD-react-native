@@ -11,17 +11,17 @@ export default function ProfileScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [editing, setEditing] = useState(false);
-  const [name, setName] = useState("Kwame Asante");
-  const [phone, setPhone] = useState("+233-54-881-2023");
+  const [name, setName] = useState("Sinh Viên Mẫu");
+  const [phone, setPhone] = useState("+84 123 456 789");
   const [notifs, setNotifs] = useState(true);
   const [campusAlerts, setCampusAlerts] = useState(true);
 
   const info = [
     { label: "Họ và Tên", value: name, editable: true, onChange: setName },
-    { label: "Mã Sinh viên", value: "UG/2022/3841", editable: false },
-    { label: "Khoa", value: "Khoa học Máy tính", editable: false },
-    { label: "Khóa", value: "300", editable: false },
-    { label: "Email", value: "s.kwame@university.edu.gh", editable: false },
+    { label: "Mã Sinh viên", value: "23103023", editable: false },
+    { label: "Khoa", value: "Khoa KHTN&CN", editable: false },
+    { label: "Khóa", value: "k23", editable: false },
+    { label: "Email", value: "sinhvien@sv.ttn.edu.vn", editable: false },
     { label: "Số điện thoại", value: phone, editable: true, onChange: setPhone },
   ];
 
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
         </View>
       </LinearGradient>
 
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: "center", marginTop: -32, marginBottom: 20 }}>
           <View style={{ position: "relative" }}>
             <View style={{ width: 80, height: 80, borderRadius: 20, backgroundColor: AppColors.accent, alignItems: "center", justifyContent: "center", borderWidth: 4, borderColor: AppColors.background, elevation: 8, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 8 }}>
@@ -55,7 +55,7 @@ export default function ProfileScreen() {
             )}
           </View>
           <Text style={{ fontSize: 22, fontWeight: "900", color: AppColors.textForeground, marginTop: 12 }}>{name}</Text>
-          <Text style={{ fontSize: 12, fontWeight: "600", color: AppColors.textMuted }}>UG/2022/3841 • Khóa 300</Text>
+          <Text style={{ fontSize: 12, fontWeight: "600", color: AppColors.textMuted }}>23103023  • Khóa k23</Text>
         </View>
 
         <View style={{ paddingHorizontal: 24, gap: 16 }}>

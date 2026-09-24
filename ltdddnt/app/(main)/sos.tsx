@@ -51,7 +51,7 @@ export default function SosScreen() {
         </View>
       </View>
 
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 20 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 24, gap: 20, paddingBottom: 110 }} showsVerticalScrollIndicator={false}>
         {/* SOS Panic Button Card */}
         <View style={[s.card, { backgroundColor: "#FEF2F2", borderColor: "#FCA5A5", alignItems: "center", padding: 24 }]}>
           <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: AppColors.danger, alignItems: "center", justifyContent: "center", marginBottom: 16, elevation: 6, shadowColor: AppColors.danger, shadowOpacity: 0.4, shadowRadius: 10 }}>

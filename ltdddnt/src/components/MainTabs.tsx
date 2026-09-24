@@ -14,7 +14,7 @@ export function CustomBottomNav({ selectedIndex, onDestinationSelected }: Custom
     'home',
     'location-on',
     'calendar-today',
-    'star-outline',
+    'assessment',
     'person-outline',
   ] as const;
 
@@ -22,7 +22,7 @@ export function CustomBottomNav({ selectedIndex, onDestinationSelected }: Custom
     'Trang chủ',
     'Bản đồ',
     'Lịch học',
-    'Sự kiện',
+    'Kết quả',
     'Hồ sơ',
   ];
 
