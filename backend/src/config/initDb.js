@@ -17,19 +17,7 @@ async function initializeTables() {
       )
     `);
 
-    // 2. Events table
-    await connection.query(`
-      CREATE TABLE IF NOT EXISTS events (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        event_date VARCHAR(100),
-        location VARCHAR(255),
-        description TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
-    // 3. Feedback table (using mssv)
+    // 2. Feedback table (using mssv)
     await connection.query(`
       CREATE TABLE IF NOT EXISTS feedback (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +28,7 @@ async function initializeTables() {
       )
     `);
 
-    // 4. SOS alerts table (using mssv)
+    // 3. SOS alerts table (using mssv)
     await connection.query(`
       CREATE TABLE IF NOT EXISTS sos_alerts (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,7 +39,7 @@ async function initializeTables() {
       )
     `);
 
-    // 5. Map locations table
+    // 4. Map locations table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS map_locations (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +51,42 @@ async function initializeTables() {
       )
     `);
 
-    console.log('✅ All database tables initialized successfully (using mssv).');
+    // 5. Notifications table
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS notifications (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        content TEXT NOT NULL,
+        sender VARCHAR(100),
+        date VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // 6. Surveys table
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS surveys (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        status VARCHAR(50) DEFAULT 'Đang mở',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // 7. Support tickets table
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS support_tickets (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        mssv VARCHAR(50),
+        title VARCHAR(255) NOT NULL,
+        content TEXT NOT NULL,
+        status VARCHAR(50) DEFAULT 'Đang xử lý',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    console.log('✅ All database tables initialized successfully.');
     connection.release();
   } catch (error) {
     console.error('❌ Error initializing database tables:', error.message);

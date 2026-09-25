@@ -10,14 +10,13 @@ export default function MainLayout() {
         onDestinationSelected={(index) => props.navigation.navigate(props.state.routeNames[index])}
       />}
     >
-      <Tabs.Screen name="index" />
-      <Tabs.Screen name="map" />
-      <Tabs.Screen name="schedule" />
-      <Tabs.Screen name="grades" />
-      <Tabs.Screen name="profile" />
-      <Tabs.Screen name="feedback" options={{ href: null }} />
-      <Tabs.Screen name="sos" options={{ href: null }} />
-      <Tabs.Screen name="course-detail" options={{ href: null }} />
+      <Tabs.Screen name="home/index" />
+      <Tabs.Screen name="map/index" />
+      <Tabs.Screen name="schedule/index" />
+      <Tabs.Screen name="grades/index" />
+      <Tabs.Screen name="profile/index" />
+      <Tabs.Screen name="feedback/index" options={{ href: null }} />
+      <Tabs.Screen name="sos/index" options={{ href: null }} />
     </Tabs>
   );
 }

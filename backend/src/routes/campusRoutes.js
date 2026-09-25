@@ -2,16 +2,7 @@ const express = require('express');
 const router = express.Router();
 const campusController = require('../controllers/campusController');
 
-/**
- * @swagger
- * /api/events:
- *   get:
- *     summary: Lấy danh sách sự kiện trường học
- *     responses:
- *       200:
- *         description: Thành công
- */
-router.get('/events', campusController.getEvents);
+
 
 /**
  * @swagger

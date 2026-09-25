@@ -3,8 +3,8 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 const SCHEDULE = [
   { id: 1, course: "Cấu trúc dữ liệu & Giải thuật", code: "CS301", room: "ENG-B204", time: "08:00 – 09:30", day: "Mon", status: "upcoming", lecturer: "Dr. Amara Osei" },

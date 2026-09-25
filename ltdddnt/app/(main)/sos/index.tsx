@@ -3,8 +3,8 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert, Linking } f
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 const EMERGENCY_CONTACTS = [
   { title: "Bảo vệ khuôn viên", number: "028.3835.xxxx", desc: "Trực 24/7 hỗ trợ an ninh cổng trường", icon: "shield", color: AppColors.danger },

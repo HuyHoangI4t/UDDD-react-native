@@ -4,8 +4,8 @@ import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 export default function ProfileScreen() {
   const router = useRouter();

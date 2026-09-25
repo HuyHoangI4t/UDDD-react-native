@@ -3,8 +3,8 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-nativ
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 const CAMPUS_BUILDINGS = [
   { id: 1, name: "Tòa A Kỹ thuật", x: 28, y: 32, type: "academic", color: AppColors.accent },
@@ -67,7 +67,7 @@ export default function MapScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background, paddingBottom: 100 }}>
-      <NavHeader title="Bản đồ khuôn viên" onBack={() => router.push("/(main)")} rightIcon="filter">
+      <NavHeader title="Bản đồ khuôn viên" onBack={() => router.push("/(main)/map")} rightIcon="filter">
         <View style={[s.inputRow, { backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)" }]}>
           <Feather name="search" size={14} color="rgba(255,255,255,0.5)" style={{ marginLeft: 14 }} />
           <TextInput style={[s.input, { color: "#fff" }]} placeholder="Tìm kiếm tòa nhà, phòng..." placeholderTextColor="rgba(255,255,255,0.5)" />

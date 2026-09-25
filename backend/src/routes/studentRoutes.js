@@ -23,7 +23,7 @@ router.post('/grades', studentController.getGrades);
  * @swagger
  * /api/student/current-courses:
  *   post:
- *     summary: Lấy danh sách học phần đang học (lọc các học phần có điểm chữ là X)
+ *     summary: Lấy danh sách học phần đang học
  *     requestBody:
  *       required: true
  *       content:
@@ -70,40 +70,6 @@ router.post('/schedule', studentController.getSchedule);
  *         description: Thành công
  */
 router.get('/student/profile/:mssv', studentController.getProfile);
-
-/**
- * @swagger
- * /api/student/tuition:
- *   post:
- *     summary: Lấy thông tin học phí sinh viên
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/GradesRequest'
- *     responses:
- *       200:
- *         description: Thành công
- */
-router.post('/student/tuition', studentController.getTuition);
-
-/**
- * @swagger
- * /api/student/courses/{mssv}:
- *   get:
- *     summary: Lấy danh sách học phần đang học
- *     parameters:
- *       - in: path
- *         name: mssv
- *         required: true
- *         schema:
- *           type: string
- *         example: 23103023
- *     responses:
- *       200:
- *         description: Thành công
- */
-router.get('/student/courses/:mssv', studentController.getCourses);
+ 
 
 module.exports = router;

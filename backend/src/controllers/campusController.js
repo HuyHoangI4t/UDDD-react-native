@@ -1,20 +1,6 @@
 const db = require('../config/db');
 
-// Get Events
-exports.getEvents = async (req, res) => {
-  try {
-    const [rows] = await db.query('SELECT * FROM events ORDER BY id DESC');
-    if (rows.length === 0) {
-      await db.query('INSERT INTO events (title, event_date, location, description) VALUES (?, ?, ?, ?)', ['Hội thảo Công nghệ AI 2026', '2026-10-05', 'Hội trường lớn', 'Chia sẻ xu hướng AI mới nhất.']);
-      await db.query('INSERT INTO events (title, event_date, location, description) VALUES (?, ?, ?, ?)', ['Ngày hội việc làm CNTT', '2026-10-20', 'Sân trường', 'Gặp gỡ các doanh nghiệp hàng đầu.']);
-      const [seededRows] = await db.query('SELECT * FROM events ORDER BY id DESC');
-      return res.json({ success: true, events: seededRows });
-    }
-    res.json({ success: true, events: rows });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Lỗi lấy sự kiện', error: error.message });
-  }
-};
+
 
 // Submit Feedback
 exports.submitFeedback = async (req, res) => {

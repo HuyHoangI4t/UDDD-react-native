@@ -3,8 +3,8 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from "reac
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 const CATEGORIES = [
   { id: "facility", label: "Cơ sở vật chất", icon: "home", color: "#F59E0B" },

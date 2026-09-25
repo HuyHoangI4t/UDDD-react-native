@@ -9,6 +9,7 @@ const setupSwagger = require('./config/swagger');
 const authRoutes = require('./routes/authRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const campusRoutes = require('./routes/campusRoutes');
+const generalRoutes = require('./routes/generalRoutes');
 
 dotenv.config();
 
@@ -42,10 +43,17 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Mount Routes
+// Mount Routes (supporting both /api/v1 and /api for backwards compatibility)
+app.use('/api/v1/auth', authRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api', studentRoutes); // /api/grades, /api/schedule
-app.use('/api', campusRoutes);  // /api/events, /api/feedback, /api/sos, /api/map
+
+app.use('/api/v1', generalRoutes);
+app.use('/api/v1', studentRoutes);
+app.use('/api/v1', campusRoutes);
+
+app.use('/api', generalRoutes);
+app.use('/api', studentRoutes);
+app.use('/api', campusRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 LTDDDNT Backend server đang chạy tại cổng ${PORT}`);

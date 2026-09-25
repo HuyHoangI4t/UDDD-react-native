@@ -4,8 +4,8 @@ import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppColors } from "../../src/constants/appColors";
-import { mainStyles as s } from "../../src/constants/globalStyles";
+import { AppColors } from "../../../src/constants/appColors";
+import { mainStyles as s } from "../../../src/constants/globalStyles";
 
 const ALERTS = [
   { id: 1, type: "info", text: "Thư viện đóng cửa lúc 8 giờ tối nay để bảo trì.", time: "2 giờ trước" },
@@ -18,7 +18,7 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   const onNavigate = (screen: string) => {
-    if (screen === "home") router.push("/(main)");
+    if (screen === "home") router.push("/(main)/home");
     else router.push(`/(main)/${screen}` as any);
   };
 
